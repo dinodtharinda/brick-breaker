@@ -19,7 +19,6 @@ public class OutOfBound : MonoBehaviour
         }
 
         if(collision.gameObject.CompareTag("Gift")){
-           
             Destroy(collision.gameObject);
         }
     }

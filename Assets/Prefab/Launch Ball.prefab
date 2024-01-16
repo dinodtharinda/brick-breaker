@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 4481629937639118698}
   - component: {fileID: 8874232567380022598}
   - component: {fileID: 2987751834500511029}
-  - component: {fileID: 8345385216363016506}
+  - component: {fileID: 1528469467606406692}
   m_Layer: 0
-  m_Name: Ball
+  m_Name: Launch Ball
   m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -149,7 +149,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.41551003
---- !u!114 &8345385216363016506
+--- !u!114 &1528469467606406692
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -158,8 +158,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 7495604226966396540}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a26e1daf51d8d1d44a8ae1a409580447, type: 3}
+  m_Script: {fileID: 11500000, guid: c7598c7ae5f95f04a8907a5674f0a3ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 8874232567380022598}
-  maxVelocity: 4
+  maxVelocity: 6

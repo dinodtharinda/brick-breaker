@@ -8,6 +8,9 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] private ObjectPool ballPool;
+    [SerializeField] private GameObject Paddle;
+    [SerializeField] private GameObject Ball;
+
     [SerializeField] private GameObject[] livesImage;
     [SerializeField] private TextMeshProUGUI levelText;
 
@@ -16,11 +19,12 @@ public class LevelManager : MonoBehaviour
     int lives = 5;
 
 
-    void Start()
+    void Awake()
     {
         currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         currentSceneName = SceneManager.GetActiveScene().name;
         levelText.text = currentSceneName.ToString();
+       
     }
 
 
@@ -34,6 +38,16 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+
+    void ResetBallPosition()
+    {
+        Paddle.transform.position = new Vector3(0, Paddle.transform.position.y, Paddle.transform.position.z); 
+         Vector3 paddlePosition = Paddle.transform.position;
+        Instantiate(Ball, paddlePosition, Ball.transform.rotation);
+    }
+
+
+
     void Restart()
     {
         if (lives <= 0)
@@ -44,7 +58,7 @@ public class LevelManager : MonoBehaviour
         {
             lives--;
             livesImage[lives].SetActive(false);
-            ballPool.SpawnBall(new Vector3(0, 0, 0), Quaternion.identity);
+            ResetBallPosition();
         }
     }
 
