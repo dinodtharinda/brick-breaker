@@ -6,9 +6,9 @@ using UnityEngine.Tilemaps;
 public class Breaker : MonoBehaviour
 
 {
-    public GameObject giftPrefab;
-    private int ballCollisionCount = 0;
+    [SerializeField] private  GameObject giftPrefab;
 
+    private int ballCollisionCount = 0;
     private Tilemap tilemap;
     void Start()
     {

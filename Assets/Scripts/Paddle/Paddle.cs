@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private ObjectPool ballPool;
+    [SerializeField] private float speed;
+    [SerializeField] private float maxX = 7.5f;
+    [SerializeField] private int giftCount = 0;
 
-    public float speed;
-    public float maxX = 7.5f;
-    public ObjectPool ballPool;
-
-    private int giftCount = 0;
 
     private Vector3 touchStartPos;
     private Vector3 touchEndPos;

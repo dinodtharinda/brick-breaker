@@ -7,13 +7,15 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] private ObjectPool ballPool;
+    [SerializeField] private GameObject[] livesImage;
+    [SerializeField] private TextMeshProUGUI levelText;
+
     int currentSceneIndex;
     String currentSceneName;
-    public ObjectPool ballPool;
-    public GameObject[] livesImage;
     int lives = 5;
-    [SerializeField] private TextMeshProUGUI levelText;
+
+
     void Start()
     {
         currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
@@ -21,7 +23,7 @@ public class LevelManager : MonoBehaviour
         levelText.text = currentSceneName.ToString();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         GameObject[] balls = GameObject.FindGameObjectsWithTag("Ball");
@@ -42,10 +44,8 @@ public class LevelManager : MonoBehaviour
         {
             lives--;
             livesImage[lives].SetActive(false);
-            
             ballPool.SpawnBall(new Vector3(0, 0, 0), Quaternion.identity);
         }
-
     }
 
     void GameOver()

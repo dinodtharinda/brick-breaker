@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
-    public GameObject prefab;  // The prefab to be pooled
+     [SerializeField] private  GameObject prefab;  
+
+
+     
     public int poolSize = 10;  // The initial size of the object pool
     public int maxActiveObjects = 400;  // Maximum number of active objects
 
