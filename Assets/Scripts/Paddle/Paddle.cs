@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private ObjectPool ballPool;
     [SerializeField] private float speed;
-    [SerializeField] private float maxX = 7.5f;
+    [SerializeField] private GameObject maxX;
     [SerializeField] private int giftCount = 0;
 
 
@@ -19,7 +19,6 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
     }
-
 
     void Update()
     {
@@ -37,8 +36,14 @@ public class PlayerMovement : MonoBehaviour
 
             float slideLength = touchEndPos.x - touchStartPos.x;
 
-            // Adjust the paddle position based on the slide length
-            transform.position = new Vector3(transform.position.x + (slideLength * speed), transform.position.y, transform.position.z);
+            // Calculate the new position of the paddle
+            float newPaddleX = transform.position.x + (slideLength * speed);
+
+            // Clamp the new position within a specific range
+            float clampedX = Mathf.Clamp(newPaddleX, maxX.transform.position.x, -maxX.transform.position.x);
+
+            // Update the paddle position
+            transform.position = new Vector3(clampedX, transform.position.y, transform.position.z);
 
             // Update the start position for the next frame
             touchStartPos = touchEndPos;
@@ -49,7 +54,6 @@ public class PlayerMovement : MonoBehaviour
             isDragging = false;
         }
     }
-
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
