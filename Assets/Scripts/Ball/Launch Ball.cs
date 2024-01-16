@@ -6,8 +6,11 @@ using UnityEngine;
 public class LaunchBall : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
+    public GameObject Paddle;
     [SerializeField] private float maxVelocity = 6f;
-    bool isLaunch = false;
+
+  public  bool isLaunch = false;
+    private bool touchInProgress = false;
 
     private Vector3 clampMagnitude;
 
@@ -32,19 +35,16 @@ public class LaunchBall : MonoBehaviour
         }
         else
         {
-            if (Input.touchCount == 1)
+            rb.transform.position = Paddle.transform.position + new Vector3(0, 0.1f, 0);
+            if (Input.touchCount > 0)
             {
                 Touch touch = Input.GetTouch(0);
-                if (touch.phase == TouchPhase.Began)
+                if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
                 {
                     Launch();
                     isLaunch = true;
+                    touchInProgress = false;
                 }
-            }
-            if (Input.GetMouseButtonDown(0))
-            {
-                Launch();
-                isLaunch = true;
             }
         }
 

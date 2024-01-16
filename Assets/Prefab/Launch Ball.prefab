@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 7495604226966396540}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.3309457, y: 3.911952, z: 0}
+  m_LocalPosition: {x: 0, y: -3.5999994, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -162,4 +162,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 8874232567380022598}
-  maxVelocity: 6
+  Paddle: {fileID: 510244757842895939, guid: 641057175fb6d5d4b8532a9424df8e9b, type: 3}
+  maxVelocity: 5
+  isLaunch: 0

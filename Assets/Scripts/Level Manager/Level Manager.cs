@@ -24,26 +24,29 @@ public class LevelManager : MonoBehaviour
         currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         currentSceneName = SceneManager.GetActiveScene().name;
         levelText.text = currentSceneName.ToString();
-       
+        // ResetBallPosition();
     }
 
 
     void Update()
     {
+
         GameObject[] balls = GameObject.FindGameObjectsWithTag("Ball");
         if (balls.Length <= 0)
         {
             Restart();
-
         }
     }
 
 
     void ResetBallPosition()
     {
-        Paddle.transform.position = new Vector3(0, Paddle.transform.position.y, Paddle.transform.position.z); 
-         Vector3 paddlePosition = Paddle.transform.position;
-        Instantiate(Ball, paddlePosition, Ball.transform.rotation);
+        Ball.transform.position = new Vector3(0, Paddle.transform.position.y, Paddle.transform.position.z);
+        Ball.GetComponent<LaunchBall>().isLaunch = false;
+        Ball.SetActive(true);
+
+
+
     }
 
 
