@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,8 +29,8 @@ public class ObjectPool : MonoBehaviour
 
     public GameObject GetObjectFromPool(Vector3 position, Quaternion rotation)
     {
-         GameObject[] balls = GameObject.FindGameObjectsWithTag("Ball");
-       
+        GameObject[] balls = GameObject.FindGameObjectsWithTag("Ball");
+
 
         if (balls.Length < maxActiveObjects)
         {
@@ -54,6 +55,38 @@ public class ObjectPool : MonoBehaviour
 
             // If the active count reaches the maximum, return null or handle it as needed
             return null;
+        }
+    }
+
+
+
+    public void SpawnBall(Vector3 position, Quaternion rotation)
+    {
+        try
+        {
+            GameObject ball = GetObjectFromPool(position, rotation);
+
+            if (ball != null)
+            {
+                // Use TryGetComponent instead of GetComponent to avoid redundant GetComponent calls
+                if (ball.TryGetComponent(out SpriteRenderer ballRenderer))
+                {
+                    ballRenderer.color = Color.white;
+
+                }
+                else
+                {
+                    Debug.LogWarning("SpriteRenderer component not found on the ball object.");
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Failed to get a ball from the pool.");
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Error: " + e.Message);
         }
     }
 }

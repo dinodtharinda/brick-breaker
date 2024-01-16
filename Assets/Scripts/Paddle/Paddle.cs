@@ -67,8 +67,8 @@ public class PlayerMovement : MonoBehaviour
                     if (ball.activeInHierarchy && giftCount < 6 && balls.Length < 400)
                     {
 
-                        SpawnBall(ball.transform.position, Quaternion.identity);
-                        SpawnBall(ball.transform.position, Quaternion.identity);
+                        ballPool.SpawnBall(ball.transform.position, Quaternion.identity);
+                        ballPool.SpawnBall(ball.transform.position, Quaternion.identity);
 
                         Debug.Log("Gift Count " + giftCount);
                     }
@@ -95,11 +95,11 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (ball != null && !ball.IsDestroyed())
                 {
-                    if (ball.activeInHierarchy && giftCount < 6 )
+                    if (ball.activeInHierarchy && giftCount < 6)
                     {
 
-                        SpawnBall(ball.transform.position, Quaternion.identity);
-                        SpawnBall(ball.transform.position, Quaternion.identity);
+                        ballPool.SpawnBall(ball.transform.position, Quaternion.identity);
+                        ballPool.SpawnBall(ball.transform.position, Quaternion.identity);
 
                         Debug.Log("Gift Count " + giftCount);
                     }
@@ -114,35 +114,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void SpawnBall(Vector3 position, Quaternion rotation)
-    {
-        try
-        {
-            GameObject ball = ballPool.GetObjectFromPool(position, rotation);
-
-            if (ball != null)
-            {
-                // Use TryGetComponent instead of GetComponent to avoid redundant GetComponent calls
-                if (ball.TryGetComponent(out SpriteRenderer ballRenderer))
-                {
-                    ballRenderer.color = Color.white;
-
-                }
-                else
-                {
-                    Debug.LogWarning("SpriteRenderer component not found on the ball object.");
-                }
-            }
-            else
-            {
-                Debug.LogWarning("Failed to get a ball from the pool.");
-            }
-        }
-        catch (Exception e)
-        {
-            Debug.LogError("Error: " + e.Message);
-        }
-    }
 
 
 }
