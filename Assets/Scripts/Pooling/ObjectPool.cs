@@ -1,81 +1,129 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
-     [SerializeField] private  GameObject prefab;  
+    [SerializeField] private GameObject prefab;
 
-
-     
-    public int poolSize = 10;  // The initial size of the object pool
-    public int maxActiveObjects = 400;  // Maximum number of active objects
+    public int poolSize = 10;
+    public int maxActiveObjects = 400;
+    public int keepActiveBalls = 300;  // Number of balls to keep active
+    public float deactivationProbability = 0.01f;
 
     private List<GameObject> pool;
 
-    void Start()
+    private void Start()
     {
+        pool = new List<GameObject>(poolSize);
         InitializePool();
     }
 
-    void InitializePool()
+    private void Update()
     {
-        pool = new List<GameObject>(poolSize);
+        if (ShouldDeactivateRandomly())
+        {
+            DeactivateRandomObjects();
+        }
+    }
 
+    private void InitializePool()
+    {
         for (int i = 0; i < poolSize; i++)
         {
-            GameObject obj = Instantiate(prefab, Vector3.zero, Quaternion.identity);
+            GameObject obj = InstantiateObject(Vector3.zero, Quaternion.identity);
             obj.SetActive(false);
             pool.Add(obj);
         }
     }
 
+    private GameObject InstantiateObject(Vector3 position, Quaternion rotation)
+    {
+        GameObject newObj = Instantiate(prefab, position, rotation);
+        newObj.SetActive(false);
+        return newObj;
+    }
+
+    private bool ShouldDeactivateRandomly()
+    {
+        return Random.value < deactivationProbability;
+    }
+
+    private void DeactivateRandomObjects()
+    {
+        int activeCount = GetActiveObjectCount();
+
+        // Calculate the number of balls to deactivate
+        int ballsToDeactivate = Mathf.Max(0, activeCount - keepActiveBalls);
+
+        // Deactivate a portion of the balls randomly
+        for (int i = 0; i < ballsToDeactivate; i++)
+        {
+            GameObject obj = GetRandomActiveObject();
+            if (obj != null)
+            {
+                obj.SetActive(false);
+            }
+        }
+    }
+
+    private GameObject GetRandomActiveObject()
+    {
+        List<GameObject> activeObjects = pool.FindAll(obj => obj.activeSelf);
+        if (activeObjects.Count > 0)
+        {
+            return activeObjects[Random.Range(0, activeObjects.Count)];
+        }
+        return null;
+    }
+
+    private int GetActiveObjectCount()
+    {
+        int activeCount = 0;
+        foreach (GameObject obj in pool)
+        {
+            if (obj.activeSelf)
+            {
+                activeCount++;
+            }
+        }
+        return activeCount;
+    }
+
     public GameObject GetObjectFromPool(Vector3 position, Quaternion rotation)
     {
-        GameObject[] balls = GameObject.FindGameObjectsWithTag("Ball");
-
-
-        if (balls.Length < maxActiveObjects)
+        if (GetActiveObjectCount() < maxActiveObjects)
         {
             foreach (GameObject obj in pool)
             {
                 if (!obj.activeSelf)
                 {
-                    obj.transform.position = position;
-                    obj.transform.rotation = rotation;
+                    obj.transform.SetPositionAndRotation(position, rotation);
                     obj.SetActive(true);
                     return obj;
                 }
             }
 
-            // If no inactive objects are found, create a new one
-            GameObject newObj = Instantiate(prefab, position, rotation);
+            GameObject newObj = InstantiateObject(position, rotation);
             pool.Add(newObj);
             return newObj;
         }
         else
         {
-
-            // If the active count reaches the maximum, return null or handle it as needed
             return null;
         }
     }
 
-
-
-    public void SpawnBall(Vector3 position, Quaternion rotation)
+    public void SpawnBall(Vector3 position, Quaternion rotation, Vector2 velocity)
     {
         try
         {
             GameObject ball = GetObjectFromPool(position, rotation);
-
+            ball.GetComponent<Rigidbody2D>().velocity = velocity*2f;
             if (ball != null)
             {
-                // Use TryGetComponent instead of GetComponent to avoid redundant GetComponent calls
                 if (ball.TryGetComponent(out SpriteRenderer ballRenderer))
                 {
                     ballRenderer.color = Color.white;
-
                 }
                 else
                 {
@@ -87,9 +135,9 @@ public class ObjectPool : MonoBehaviour
                 Debug.LogWarning("Failed to get a ball from the pool.");
             }
         }
-        catch (Exception e)
+        catch (System.Exception e)
         {
-            Debug.LogError("Error: " + e.Message);
+            Debug.LogWarning("Error: " + e.Message);
         }
     }
 }

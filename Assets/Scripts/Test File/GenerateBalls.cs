@@ -14,7 +14,7 @@ public class GenerateBalls : MonoBehaviour
         {
             float randomX = Random.Range(-2f, 2f);
             float randomY = Random.Range(-2f, 2f);
-           ballPool. SpawnBall(new Vector2(randomX, -3f), Quaternion.identity);
+        //    ballPool. SpawnBall(new Vector2(randomX, -3f), Quaternion.identity);
         }
     }
 }

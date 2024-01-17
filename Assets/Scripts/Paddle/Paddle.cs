@@ -67,11 +67,12 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (ball != null && !ball.IsDestroyed())
                 {
+
                     if (ball.activeInHierarchy && giftCount < 6 && balls.Length < 400)
                     {
 
-                        ballPool.SpawnBall(ball.transform.position, Quaternion.identity);
-                        ballPool.SpawnBall(ball.transform.position, Quaternion.identity);
+                         ballPool.SpawnBall(ball.transform.position, Quaternion.identity,ball.GetComponent<Rigidbody2D>().velocity);
+                        ballPool.SpawnBall(ball.transform.position, Quaternion.identity,ball.GetComponent<Rigidbody2D>().velocity);
 
                         Debug.Log("Gift Count " + giftCount);
                     }
@@ -85,7 +86,6 @@ public class PlayerMovement : MonoBehaviour
             Destroy(collision.gameObject);
         }
     }
-
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Gift"))
@@ -101,8 +101,8 @@ public class PlayerMovement : MonoBehaviour
                     if (ball.activeInHierarchy && giftCount < 6)
                     {
 
-                        ballPool.SpawnBall(ball.transform.position, Quaternion.identity);
-                        ballPool.SpawnBall(ball.transform.position, Quaternion.identity);
+                        ballPool.SpawnBall(ball.transform.position, Quaternion.identity,ball.GetComponent<Rigidbody2D>().velocity);
+                        ballPool.SpawnBall(ball.transform.position, Quaternion.identity,ball.GetComponent<Rigidbody2D>().velocity);
 
                         Debug.Log("Gift Count " + giftCount);
                     }

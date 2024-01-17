@@ -8,6 +8,8 @@ TagManager:
   - Ball
   - Blocks
   - Walls
+  - Gift
+  - Paddle
   layers:
   - Default
   - TransparentFX
@@ -18,7 +20,7 @@ TagManager:
   - Gift Layer
   - Brick Layer
   - Ball
-  - 
+  - Paddle Layer
   - 
   - 
   - 
