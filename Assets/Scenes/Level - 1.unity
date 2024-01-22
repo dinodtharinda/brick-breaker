@@ -25038,7 +25038,7 @@ Transform:
   m_GameObject: {fileID: 815743648}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.5880332, y: 51.428574, z: 0}
+  m_LocalPosition: {x: -0.2819902, y: 51.428574, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -25148,7 +25148,7 @@ Transform:
   m_GameObject: {fileID: 853173260}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 2.3104265, y: 0, z: 0}
+  m_LocalPosition: {x: 2.4959216, y: 0, z: 0}
   m_LocalScale: {x: 21.00391, y: 0.1011011, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -26508,7 +26508,7 @@ Transform:
   m_GameObject: {fileID: 1936886853}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -2.3104265, y: 0, z: 0}
+  m_LocalPosition: {x: -2.4959216, y: 0, z: 0}
   m_LocalScale: {x: 21.00391, y: 0.10110114, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -26832,7 +26832,7 @@ MonoBehaviour:
   prefab: {fileID: 7495604226966396540, guid: 2d9317c1c308f5a45b84265f09165089, type: 3}
   poolSize: 600
   maxActiveObjects: 450
-  keepActiveBalls: 300
+  keepActiveBalls: 450
   deactivationProbability: 0.01
 --- !u!4 &2073417807
 Transform:
@@ -27060,8 +27060,8 @@ GameObject:
   - component: {fileID: 3544682806965652933}
   - component: {fileID: 9221836471777761171}
   - component: {fileID: 792992010655675920}
-  - component: {fileID: 4442703480400836662}
   - component: {fileID: 3488504288646825945}
+  - component: {fileID: 9221836471777761172}
   m_Layer: 9
   m_Name: Paddle
   m_TagString: Paddle
@@ -27095,57 +27095,12 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -3.6, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.07, z: 1}
+  m_LocalScale: {x: 8, y: 0.07, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 815743650}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &4442703480400836662
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2539624948520339764}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!212 &9221836471777761171
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -27198,6 +27153,57 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!60 &9221836471777761172
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2539624948520339764}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.12465644, y: 0.498515}
+      - {x: -0.5002084, y: -0.008980967}
+      - {x: -0.5, y: -0.5}
+      - {x: 0.5, y: -0.5}
+      - {x: 0.49924937, y: 0.007960349}
+      - {x: 0.12315349, y: 0.50784737}
+  m_UseDelaunayMesh: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

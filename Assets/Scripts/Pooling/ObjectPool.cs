@@ -127,17 +127,17 @@ public class ObjectPool : MonoBehaviour
                 }
                 else
                 {
-                    Debug.LogWarning("SpriteRenderer component not found on the ball object.");
+                    // Debug.LogWarning("SpriteRenderer component not found on the ball object.");
                 }
             }
             else
             {
-                Debug.LogWarning("Failed to get a ball from the pool.");
+                // Debug.LogWarning("Failed to get a ball from the pool.");
             }
         }
         catch (System.Exception e)
         {
-            Debug.LogWarning("Error: " + e.Message);
+            // Debug.LogWarning("Error: " + e.Message);
         }
     }
 }

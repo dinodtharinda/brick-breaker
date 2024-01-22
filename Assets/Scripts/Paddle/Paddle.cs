@@ -68,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
                 if (ball != null && !ball.IsDestroyed())
                 {
 
-                    if (ball.activeInHierarchy && giftCount < 6 && balls.Length < 400)
+                    if (ball.activeInHierarchy && giftCount < 6 && balls.Length < 90)
                     {
 
                          ballPool.SpawnBall(ball.transform.position, Quaternion.identity,ball.GetComponent<Rigidbody2D>().velocity);
@@ -100,7 +100,6 @@ public class PlayerMovement : MonoBehaviour
                 {
                     if (ball.activeInHierarchy && giftCount < 6)
                     {
-
                         ballPool.SpawnBall(ball.transform.position, Quaternion.identity,ball.GetComponent<Rigidbody2D>().velocity);
                         ballPool.SpawnBall(ball.transform.position, Quaternion.identity,ball.GetComponent<Rigidbody2D>().velocity);
 
