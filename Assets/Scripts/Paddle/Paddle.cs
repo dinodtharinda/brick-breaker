@@ -6,7 +6,9 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private ObjectPool ballPool;
     [SerializeField] private float speed;
-    [SerializeField] private GameObject maxX;
+    [SerializeField] private GameObject WallRight;
+    [SerializeField] private GameObject WallLeft;
+
     [SerializeField] private int giftCount = 0;
 
 
@@ -40,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
             float newPaddleX = transform.position.x + (slideLength * speed);
 
             // Clamp the new position within a specific range
-            float clampedX = Mathf.Clamp(newPaddleX, maxX.transform.position.x, -maxX.transform.position.x);
+            float clampedX = Mathf.Clamp(newPaddleX,WallLeft.transform.position.x+0.2f, WallRight.transform.position.x-0.2f);
 
             // Update the paddle position
             transform.position = new Vector3(clampedX, transform.position.y, transform.position.z);
