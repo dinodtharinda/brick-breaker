@@ -44,9 +44,6 @@ public class LevelManager : MonoBehaviour
         Ball.transform.position = new Vector3(0, Paddle.transform.position.y, Paddle.transform.position.z);
         Ball.GetComponent<LaunchBall>().isLaunch = false;
         Ball.SetActive(true);
-
-
-
     }
 
 
