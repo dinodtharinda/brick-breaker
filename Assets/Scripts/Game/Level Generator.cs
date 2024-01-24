@@ -10,50 +10,50 @@ public class LevelGenerator : MonoBehaviour
     Button[] LevelButtons;
 
     private void Awake()
-{
-    int ReachedLevel = PlayerPrefs.GetInt("ReachedLevel", 1);
-
-    // Assuming the first scene in the build settings is not a level scene
-    LevelButtons = new Button[SceneManager.sceneCountInBuildSettings - 1];
-
-    int buttonIndex = 0;
-
-    for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
     {
-        string sceneName = SceneUtility.GetScenePathByBuildIndex(i);
-        sceneName = System.IO.Path.GetFileNameWithoutExtension(sceneName);
+        int ReachedLevel = PlayerPrefs.GetInt("ReachedLevel", 1);
 
-        if (sceneName.StartsWith("Level - "))
+        // Assuming the first scene in the build settings is not a level scene
+        LevelButtons = new Button[SceneManager.sceneCountInBuildSettings - 1];
+
+        int buttonIndex = 0;
+
+        for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
         {
-            int level = int.Parse(sceneName.Substring(8)); // Extract the level number
+            string sceneName = SceneUtility.GetScenePathByBuildIndex(i);
+            sceneName = System.IO.Path.GetFileNameWithoutExtension(sceneName);
 
-            LevelButtons[buttonIndex] = CreateLevelButton(sceneName, level);
+            if (sceneName.StartsWith("Level - "))
+            {
+                int level = int.Parse(sceneName.Substring(8)); // Extract the level number
 
-            // if (level > ReachedLevel)
-            // {
-            //     LevelButtons[buttonIndex].interactable = false;
-            // }
+                LevelButtons[buttonIndex] = CreateLevelButton(sceneName, level);
 
-            buttonIndex++;
+                if (level > ReachedLevel)
+                {
+                    LevelButtons[buttonIndex].interactable = false;
+                }
+
+                buttonIndex++;
+            }
         }
     }
-}
 
-private Button CreateLevelButton(string sceneName, int level)
-{
-    Button button = Instantiate(levelButtonPrefab, transform);
-    button.name = "LevelButton" + level;
-
-    TextMeshProUGUI text = button.GetComponentInChildren<TextMeshProUGUI>();
-    if (text != null)
+    private Button CreateLevelButton(string sceneName, int level)
     {
-        text.text = level.ToString();
+        Button button = Instantiate(levelButtonPrefab, transform);
+        button.name = "LevelButton" + level;
+
+        TextMeshProUGUI text = button.GetComponentInChildren<TextMeshProUGUI>();
+        if (text != null)
+        {
+            text.text = level.ToString();
+        }
+
+        button.onClick.AddListener(() => LoadScene(sceneName)); // Use the scene name
+
+        return button;
     }
-
-    button.onClick.AddListener(() => LoadScene(sceneName)); // Use the scene name
-
-    return button;
-}
 
 
     public void LoadScene(string sceneName)
